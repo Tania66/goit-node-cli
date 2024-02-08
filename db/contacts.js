@@ -20,7 +20,7 @@ async function removeContact(contactId) {
   if (remove === -1) {
     return null;
   }
-  const del = contacts.splice(contactId, 1);
+  const del = contacts.splice(remove, 1);
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return del;
 }
@@ -28,9 +28,9 @@ async function removeContact(contactId) {
 async function addContact(name, email, phone) {
   const contacts = await listContacts();
   const payload = {
-    name: `${name}`,
-    email: `${email}`,
-    phone: `${phone}`,
+    name,
+    email,
+    phone,
     id: shortid.generate(),
   };
   contacts.push(payload);
